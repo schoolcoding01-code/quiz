@@ -1,1 +1,186 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>TTS Scratch</title>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+input{
+
+width:28px;
+height:28px;
+text-align:center;
+font-size:16px;
+text-transform:uppercase;
+margin:1px;
+
+}
+
+.benar{
+
+background:lightgreen;
+
+}
+
+.salah{
+
+background:red;
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>TTS Scratch</h1>
+
+<div id="soal"></div>
+
+<h2 id="hasil"></h2>
+
+<script>
+
+let data=[
+
+["Perintah untuk bergerak maju beberapa langkah","MOVE"],
+["Perintah mengarahkan sprite ke arah tertentu","POINTINDIRECTION"],
+["Perintah memutar sprite ke kanan","TURNRIGHT"],
+["Perintah memutar sprite ke kiri","TURNLEFT"],
+["Perintah memantul saat menyentuh tepi","IFONEDGEBOUNCE"],
+["Perintah mengatur gaya rotasi","SETROTATIONSTYLE"],
+["Blok untuk mengetahui arah sprite","DIRECTION"],
+["Blok untuk mendeteksi sentuhan objek","TOUCHING"],
+["Blok untuk mendeteksi warna tertentu","TOUCHINGCOLOR"],
+["Blok untuk membandingkan dua warna","COLORISTOUCHINGCOLOR"],
+["Perintah mengubah efek warna","CHANGECOLOREFFECTBY"],
+["Perintah mengatur efek warna","SETCOLOREFFECTTO"],
+["Perintah menghapus semua efek grafis","CLEARGRAPHICEFFECTS"],
+["Perintah mengubah ukuran sprite","CHANGESIZEBY"],
+["Perintah mengatur ukuran sprite","SETSIZETO"],
+["Perintah menampilkan sprite","SHOW"],
+["Perintah menyembunyikan sprite","HIDE"],
+["Perintah mengganti kostum berikutnya","NEXTCOSTUME"],
+["Perintah mengganti ke kostum tertentu","SWITCHCOSTUMETO"],
+["Perintah mengatakan sesuatu","SAY"],
+
+["Perintah berpikir","THINK"],
+["Perintah menunggu","WAIT"],
+["Mengulangi beberapa kali","REPEAT"],
+["Mengulangi terus menerus","FOREVER"],
+["Memeriksa kondisi","IF"],
+["Kondisi dua pilihan","IFELSE"],
+["Menghentikan program","STOP"],
+["Saat bendera hijau diklik","WHENGREENFLAGCLICKED"],
+["Saat tombol keyboard ditekan","WHENKEYPRESSED"],
+["Saat sprite diklik","WHENTHISSPRITECLICKED"],
+["Bertanya kepada pengguna","ASK"],
+["Menyimpan jawaban pengguna","ANSWER"],
+["Mengubah ukuran tertentu","SETSIZETO"],
+["Menampilkan sprite","SHOW"],
+["Menyembunyikan sprite","HIDE"],
+["Mengubah efek tampilan","CHANGEEFFECTBY"],
+["Mengatur efek tampilan","SETEFFECTTO"],
+["Menghapus semua efek","CLEARGRAPHICEFFECTS"],
+["Mengetahui ukuran sprite","SIZE"],
+["Mengganti background","SWITCHBACKDROPTO"]
+
+];
+
+let benar=0;
+let selesai=0;
+
+let tempat=document.getElementById("soal");
+
+data.forEach(function(item,index){
+
+tempat.innerHTML+=
+"<p>"+(index+1)+". "+item[0]+"</p>";
+
+for(let i=0;i<item[1].length;i++){
+
+tempat.innerHTML+=
+"<input maxlength='1' class='s"+index+"'>";
+
+}
+
+tempat.innerHTML+=
+"<br><button id='btn"+index+"' onclick='cek("+index+")'>Cek</button><hr>";
+
+});
+
+function cek(no){
+
+let isi="";
+
+let kotak=
+document.querySelectorAll(".s"+no);
+
+kotak.forEach(function(x){
+
+isi+=x.value.toUpperCase();
+
+});
+
+let status=false;
+
+if(isi==data[no][1]){
+
+status=true;
+benar++;
+
+}
+
+kotak.forEach(function(x){
+
+if(status){
+
+x.classList.add("benar");
+
+}
+
+else{
+
+x.classList.add("salah");
+
+}
+
+x.disabled=true;
+
+});
+
+document.getElementById(
+"btn"+no
+).disabled=true;
+
+selesai++;
+
+if(selesai==40){
+
+let nilai=benar*2.5;
+
+document.getElementById(
+"hasil"
+).innerHTML=
+
+"Jumlah Benar : "
++benar+
+"<br>Nilai : "
++nilai;
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
